@@ -1,0 +1,21 @@
+require('dotenv').config();
+const express = require('express');
+const cors = require('cors');
+const { sequelize } = require('./models');
+const authRoutes = require('./routes/auth');
+const empRoutes = require('./routes/employees');
+const teamRoutes = require('./routes/teams');
+const logRoutes = require('./routes/logs');
+const { authMiddleware } = require('./middlewares/auth');
+const app = express();
+app.use(cors());
+app.use(express.json());
+app.use('/api/auth', authRoutes);
+app.use('/api/employees', empRoutes);
+app.use('/api/teams', teamRoutes);
+app.use('/api/logs', logRoutes);
+const PORT = process.env.PORT || 5000;
+(async ()=> {
+  await sequelize.sync({ alter: true });
+  app.listen(PORT, ()=> console.log('Backend running on port', PORT));
+})();

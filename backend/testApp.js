@@ -1,0 +1,13 @@
+require('dotenv').config();
+const express = require('express');
+const app = express();
+app.use(express.json());
+const auth = require('./src/routes/auth');
+const emp = require('./src/routes/employees');
+const team = require('./src/routes/teams');
+const logs = require('./src/routes/logs');
+app.use('/api/auth', auth);
+app.use('/api/employees', emp);
+app.use('/api/teams', team);
+app.use('/api/logs', logs);
+module.exports = app;
