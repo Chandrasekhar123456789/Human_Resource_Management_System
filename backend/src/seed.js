@@ -1,5 +1,6 @@
 const { Organisation, User, Employee, Team, sequelize } = require('./models');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
+
 
 async function seed(){
   await sequelize.sync();
